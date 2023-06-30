@@ -10,6 +10,7 @@ import java.util.function.Function;
 import org.springframework.hateoas.EntityModel;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 public class GameLogic {
 
@@ -45,17 +46,13 @@ public class GameLogic {
 
 	public static record GameBoard(boolean[][] obstacles, int prizeCoordinateX, int prizeCoordinateY) {}
 
+	@JsonIncludeProperties({"interaction"})
 	public static class GameState {
-		@JsonIgnore
 		private GameBoard gameBoard;
-		@JsonIgnore
 		private int playerCoordinateX;
-		@JsonIgnore
 		private int playerCoordinateY;
-		@JsonIgnore
 		private int turns;
 		private String interaction;
-		@JsonIgnore
 		private boolean gameFinished;
 
 		public GameState(GameBoard gameBoard, int playerCoordinateX, int playerCoordinateY, GameMove move, int turns) {
